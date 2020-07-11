@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, reverse, HttpResponseRedirect
 
 from . import util
 
+import random
 # print(util.list_entries(), "\n\n\n")
 
 def index(request):
@@ -34,3 +35,17 @@ def search(request):
 
 def createPage(request):
     return render(request, 'encyclopedia/createPage.html')
+
+def savePage(request):
+    
+    title = request.POST['title']
+    contents = request.POST['content']
+
+    return HttpResponse(title)
+
+def randomPage(request):
+
+    queries = util.list_entries()
+    title = random.choice(queries)
+
+    return HttpResponseRedirect(reverse('ency:singlePage', args=(title,)))

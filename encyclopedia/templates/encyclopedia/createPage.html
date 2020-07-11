@@ -8,8 +8,9 @@
     </a>
     {% endfor %}
 </ul> -->
-<form>
-    Title:<br>
+<form action="{% url 'ency:savePage' %}" method="post">
+    {% csrf_token %} Title:
+    <br>
     <input type="text" placeholder="Enter title" name="title"><br> Markdown content:<br>
     <textarea style="width: 300px; height: 159px;" placeholder="Enter markdown content" name="content"></textarea><br>
     <input type="submit">
