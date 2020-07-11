@@ -8,6 +8,7 @@
     </a>
     {% endfor %}
 </ul> -->
+{% if error %} {{ error }} {% endif %}
 <form action="{% url 'ency:savePage' %}" method="post">
     {% csrf_token %} Title:
     <br>

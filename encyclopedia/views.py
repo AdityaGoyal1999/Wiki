@@ -34,14 +34,20 @@ def search(request):
     return render(request, 'encyclopedia/searchResults.html', {"entry": entry, "results": results})
 
 def createPage(request):
-    return render(request, 'encyclopedia/createPage.html')
+    return render(request, 'encyclopedia/createPage.html', {'error': None})
 
 def savePage(request):
     
     title = request.POST['title']
     contents = request.POST['content']
+    queries = util.list_entries()
+    if title in queries:
+        return render(request, 'encyclopedia/createPage.html', {'error': 'The title already exists.'})
+    else:
+        util.save_entry(title, contents)
+        return HttpResponseRedirect(reverse('ency:singlePage', args=(title,)))
 
-    return HttpResponse(title)
+    # return HttpResponse(title)
 
 def randomPage(request):
 
