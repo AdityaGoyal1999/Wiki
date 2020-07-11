@@ -31,3 +31,6 @@ def search(request):
         if entry.lower() in query.lower():
             results.append(query)
     return render(request, 'encyclopedia/searchResults.html', {"entry": entry, "results": results})
+
+def createPage(request):
+    return render(request, 'encyclopedia/createPage.html')

@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %} {% block title %} New Page {% endblock %} {% block body %}
+<h1>Create New Page</h1>
+
+<!-- <ul>
+    {% for entry in entries %}
+    <a href="{% url 'ency:singlePage' entry %}">
+        <li>{{ entry }}</li>
+    </a>
+    {% endfor %}
+</ul> -->
+<form>
+    <input type="text" placeholder="Enter title"><br>
+    <textarea placeholder="Enter markdown content" rows="4" cols="30"></textarea><br>
+    <input type="submit">
+</form>
+
+{% endblock %}
