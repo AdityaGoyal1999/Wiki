@@ -27,7 +27,7 @@ def search(request):
     response = util.get_entry(entry)
     # print(response, "\n\n")
     if response is not None:
-        return HttpResponse(response)
+        return HttpResponseRedirect(reverse('ency:singlePage', args=(entry,)))
     results = []
     queries = util.list_entries()
     print(queries, "\n\n\n")
