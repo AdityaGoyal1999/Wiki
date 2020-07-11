@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, reverse, HttpResponseRedirect
 
 from . import util
-
+from markdown2 import Markdown
 import random
 # print(util.list_entries(), "\n\n\n")
 
@@ -16,7 +16,10 @@ def singlePage(request, title):
     if response is None:
         return HttpResponse("Nothing found")
     else:
-        return HttpResponse(response)
+        # return HttpResponse(response)
+        markdowner = Markdown()
+        print(markdowner.convert(response),"\n\n\n")
+        return render(request, 'encyclopedia/singlePage.html',{"contents": markdowner.convert(response)})
 
 def search(request):
 
@@ -47,7 +50,6 @@ def savePage(request):
         util.save_entry(title, contents)
         return HttpResponseRedirect(reverse('ency:singlePage', args=(title,)))
 
-    # return HttpResponse(title)
 
 def randomPage(request):
 
