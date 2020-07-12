@@ -6,7 +6,7 @@
     <a href="{% url 'ency:singlePage' result %}">
         <li>{{ result }}</li>
     </a>
-    {% endfor %}
+    {% empty %} There are no matching results. {% endfor %}
 </ul>
 
 {% endblock %}
