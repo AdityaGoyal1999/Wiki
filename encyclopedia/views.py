@@ -14,18 +14,15 @@ def singlePage(request, title):
 
     response = util.get_entry(title)
     if response is None:
-        return HttpResponse("Nothing found")
+        return render(request, "encyclopedia/error.html")
     else:
-        # return HttpResponse(response)
         markdowner = Markdown()
-        print(markdowner.convert(response),"\n\n\n")
-        return render(request, 'encyclopedia/singlePage.html',{"contents": markdowner.convert(response)})
+        return render(request, 'encyclopedia/singlePage.html',{"contents": markdowner.convert(response), "title": title})
 
 def search(request):
 
     entry = request.GET['q']
     response = util.get_entry(entry)
-    # print(response, "\n\n")
     if response is not None:
         return HttpResponseRedirect(reverse('ency:singlePage', args=(entry,)))
     results = []
@@ -50,6 +47,21 @@ def savePage(request):
         util.save_entry(title, contents)
         return HttpResponseRedirect(reverse('ency:singlePage', args=(title,)))
 
+def editPage(request, title):
+
+    response = util.get_entry(title)
+    return render(request, 'encyclopedia/editPage.html', {"title": title, "contents": response})
+
+
+# Edit this
+def editPageSave(request):
+
+    
+    contents = request.POST['content']
+    title = request.POST['title']
+    queries = util.list_entries()
+    util.save_entry(title, contents)
+    return HttpResponseRedirect(reverse('ency:singlePage', args=(title,)))
 
 def randomPage(request):
 

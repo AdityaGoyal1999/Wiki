@@ -1,0 +1,11 @@
+{% extends "encyclopedia/layout.html" %} {% block title %} New Page {% endblock %} {% block body %}
+<h1>Edit - {{ title }}</h1>
+
+<form action="{% url 'ency:editPageSave' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{ title }}" name="title"> Edit Contents:<br>
+    <textarea style=" width: 600px; height: 500px;" placeholder="Enter markdown content" name="content">{{ contents }}</textarea><br>
+    <input type="submit">
+</form>
+
+{% endblock %}

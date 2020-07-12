@@ -1,1 +1,2 @@
-{% extends "encyclopedia/layout.html" %} {% block title %} Encyclopedia {% endblock %} {% block body %} {{ contents|safe }} {% endblock %}
+{% extends "encyclopedia/layout.html" %} {% block title %} Encyclopedia {% endblock %} {% block body %} {{ contents|safe }}
+<a href="{% url 'ency:editPage' title %}">Edit page</a> {% endblock %}

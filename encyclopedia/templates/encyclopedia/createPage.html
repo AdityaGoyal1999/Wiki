@@ -1,14 +1,8 @@
 {% extends "encyclopedia/layout.html" %} {% block title %} New Page {% endblock %} {% block body %}
 <h1>Create New Page</h1>
 
-<!-- <ul>
-    {% for entry in entries %}
-    <a href="{% url 'ency:singlePage' entry %}">
-        <li>{{ entry }}</li>
-    </a>
-    {% endfor %}
-</ul> -->
-{% if error %} {{ error }} {% endif %}
+{% if error %}
+<h4 style="color: red;">{{ error }}</h4> {% endif %}
 <form action="{% url 'ency:savePage' %}" method="post">
     {% csrf_token %} Title:
     <br>
